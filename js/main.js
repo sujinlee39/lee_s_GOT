@@ -1,35 +1,35 @@
 (() => {
   console.log('video stuff fired');
 
-  const vidPlayer = document.querySelector('video').
-        playButton = document.querySelectorAll('button')[0],
-        pauseButton = document.querySelectorAll('button')[1],
-        rewindButton = document.querySelectorAll('button')[2];
+// add to the String prototype to cap the first letter
+// review this first thing next week!
+String.prototype.capIt = function() { return this.replace(this.charAt(), this.charAt().toUpperCase()); };
 
-  function volOn() {
-    vidPlayer.muted = false;
-  }
+//variables at the top
+  const sigils = document.querySelectorAll('.sigilContainer'),
+        lightbox = document.querySelector('.lightbox'),
+        closeLightbox = document.querySelector('.close-lightbox'),
+        vidPlayer = document.querySelector('video');
 
-  function volOff() {
-    vidPlayer.muted = true;
-  }
+//methods / functions in the middle
+function loadMovie() {
+  //debugger;
+  // 1. turn on the lightbox
+  lightbox.classList.add('show-lightbox');
 
-  function rewindVid() {
-    vidPlayer.currentTime -= 5;
-  }
+  // 2. grab the right video based on the class name -> the split yields the name
+  var house = this.className.split(' ')[1].capIt();
 
-  function playVideo() {
-    vidPlayer.play();
-  }
+  vidPlayer.play();
+}
 
-  function pauseVideo() {
-    vidPlayer.pause();
-  }
+function closeLBox() {
+  lightbox.classList.remove('show-lightbox');
+  vidPlayer.pause();
+  vidPlayer.currentTime = 0;
+}
 
-  vidPlayer.addEventListener('mouseover', volOn);
-  vidPlayer.addEventListener('mouseout', volOff);
-
-  rewindButton.addEventListener('click', rewindVid);
-  pauseButton.addEventListener('click', pauseVideo);
-  playButton.addEventListener('click', playVideo);
+//events at the bottom
+sigils.forEach(sigil => sigil.addEventListener('click', loadMovie));
+closeLightbox.addEventListener('click', closeLBox);
 })();
