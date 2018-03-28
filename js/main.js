@@ -9,7 +9,10 @@ String.prototype.capIt = function() { return this.replace(this.charAt(), this.ch
   const sigils = document.querySelectorAll('.sigilContainer'),
         lightbox = document.querySelector('.lightbox'),
         closeLightbox = document.querySelector('.close-lightbox'),
-        vidPlayer = document.querySelector('video');
+        vidPlayer = document.querySelector('video'),
+        playPause = document.querySelector('.play-pause'),
+        ffWd = document.querySelector('.forward'),
+        rWnd = document.querySelector('.rewind');
 
 //methods / functions in the middle
 function loadMovie() {
@@ -20,6 +23,10 @@ function loadMovie() {
   // 2. grab the right video based on the class name -> the split yields the name
   var house = this.className.split(' ')[1].capIt();
 
+  // 3. Put the path together and make the video load and vidPlayer
+  vidPlayer.src = `video/House-${house}.${vidPlayer.currentSrc.split('.')[1]}`;
+
+  vidPlayer.load();
   vidPlayer.play();
 }
 
@@ -29,7 +36,36 @@ function closeLBox() {
   vidPlayer.currentTime = 0;
 }
 
+function togglePlay() {
+  //flip this accoring to the video state => of playing, pause it. If it's pasued, play it. And change the icon's class to show the correct state (play / pause data-icon attribute)
+  //debugger;
+  var theSVG = this.firstElementChild;
+
+  if (vidPlayer.paused) {
+    vidPlayer.play();
+    theSVG.dataset.icon = "pause-circle";
+  } else {
+    vidPlayer.pause();
+    theSVG.dataset.icon = "play-circle";
+  }
+}
+
+function ffWdVid() {
+  debugger;
+  //look at adjust playback rate => MDN using video
+}
+
+function rWindVid() {
+  debugger;
+  //look at adjust playback rate => MDN using video
+}
+
 //events at the bottom
 sigils.forEach(sigil => sigil.addEventListener('click', loadMovie));
 closeLightbox.addEventListener('click', closeLBox);
+
+vidPlayer.addEventListener('ended', closeLBox);
+playPause.addEventListener('click', togglePlay, false);
+ffWd.addEventListener('click', ffWdVid);
+rWnd.addEventListener('click', rWindVid);
 })();
