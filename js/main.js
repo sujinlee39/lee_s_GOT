@@ -12,7 +12,8 @@ String.prototype.capIt = function() { return this.replace(this.charAt(), this.ch
         vidPlayer = document.querySelector('video'),
         playPause = document.querySelector('.play-pause'),
         ffWd = document.querySelector('.forward'),
-        rWnd = document.querySelector('.rewind');
+        rWnd = document.querySelector('.rewind'),
+        imageBanner = document.querySelector('#houseImages');
 
 //methods / functions in the middle
 function loadMovie() {
@@ -28,6 +29,16 @@ function loadMovie() {
 
   vidPlayer.load();
   vidPlayer.play();
+
+  animateBanners(this.dataset.offset);
+}
+
+function animateBanners(offset) {
+  console.log(600 * offset); // this should give us the value that we need!
+
+// animate the banners across the source
+// 600 is the width of each image -> the sum / product is how much it needs to move
+  imageBanner.style.right = (offset * 600) + "px";
 }
 
 function closeLBox() {
