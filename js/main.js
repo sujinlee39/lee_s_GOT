@@ -10,6 +10,8 @@ String.prototype.capIt = function() { return this.replace(this.charAt(), this.ch
         lightbox = document.querySelector('.lightbox'),
         closeLightbox = document.querySelector('.close-lightbox'),
         vidPlayer = document.querySelector('video'),
+        name = document.querySelector('#changeName'),
+        title = document.querySelector('#videoTitle'),
         playPause = document.querySelector('.play-pause'),
         ffWd = document.querySelector('.forward'),
         rWnd = document.querySelector('.rewind'),
@@ -26,6 +28,9 @@ function loadMovie() {
 
   // 3. Put the path together and make the video load and vidPlayer
   vidPlayer.src = `video/House-${house}.${vidPlayer.currentSrc.split('.')[1]}`;
+
+  name.textContent = house;
+  title.textContent = house;
 
   vidPlayer.load();
   vidPlayer.play();
