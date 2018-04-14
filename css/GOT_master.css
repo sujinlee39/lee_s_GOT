@@ -28,6 +28,17 @@ main {
 	top:30px;
 }
 
+p
+{
+  font-family: arial, sans-serif;
+  text-align: center;
+  color: white;
+  font-size: 1em;
+  margin-top: 20px;
+  padding: 30px 30px 0px 30px;
+  line-height: 25px;
+}
+
 #imageContainer {
 	width:600px;
 	height:360px;
